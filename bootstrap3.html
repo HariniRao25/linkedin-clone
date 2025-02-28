@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linkedin</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        *
+        {
+            margin:0;
+            padding:0;
+            box-sizing: border-box;
+        }
+        body
+        {
+            background-color: rgba(178, 230, 173, 0.212);
+        }
+        .nav
+        {
+            width:100%;
+            height:50px;
+            position: fixed;
+            left:0;
+            top:0;
+            z-index:2;
+        }
+        .bodyContent
+        {
+            margin-top:80px;
+            z-index: 0;
+        }
+        .bg
+        {
+            background-color: white;
+            border:1px solid rgba(115, 115, 115, 0.277);
+        }
+
+        .leftPart,.middlePart,.rightPart
+        {
+            min-height: 100vh;
+        }
+        .leftPart
+        {
+            width:20vw;
+        }
+        .middlePart
+        {
+            width:45vw;
+            margin-bottom: 30px;
+        }
+        .rightPart
+        {
+            min-height: 900vh;
+            width:20vw;
+        }
+        .lsub1
+        {
+            height:270px;
+            
+        }
+        .lsub2 , .lsub3
+        {
+            height:150px;
+        }
+        .mtop
+        {
+            height:150px;
+        }
+        .mcomponents
+        {
+            height:fit-content;
+        }
+        .rtop
+        {
+            height:fit-content;
+        }
+        .rpart{
+            width:20vw;
+            position: sticky;
+            top:80px;
+        }
+        .rTop , .rBtm
+        {
+            height:fit-content;
+        }
+        .notify-mark
+        {
+            width:20px;
+            height: 15px;
+            font-size: 8px;
+            border-radius: 5px;
+        }
+        .dots
+        {
+            gap:2px;
+        }
+        .profile
+        {
+            width:80px;
+            height:80px;
+            border-radius: 50%;
+            border: 2px solid white;
+            background-color: rgb(1, 15, 15);
+            position: relative;
+            bottom:50px;
+            left:30px;
+        }
+
+        .profileInfo
+        {
+            bottom:50px;
+        }
+        .profileInfo div
+        {
+            font-size: 14px;
+        }
+        .bttn{
+            width:80%;
+            height:50px;
+            border: none;
+            border: 1px solid rgb(100, 100, 100);
+            border-radius:25px;
+            text-align:left;
+            padding-left:10px;
+            font-weight: 500;
+            opacity:0.6;
+        }
+        .mid-icons i
+        {
+            font-size: 18px;
+        }
+        .puzzle
+        {
+            font-size: 13px;
+        }
+        .hvr{
+            padding:2px 0px 0px 15px;
+        }
+        .hvr:hover{
+            background-color: rgba(0, 0, 0, 0.172);
+        }
+        @media (max-width:992px)
+        {
+            .middlePart,.rightPart,.rpart
+            {
+                width:65vw;
+            }
+            .leftPart
+            {
+                width:30vw;
+            }
+            
+        }
+        @media(max-width:768px)
+        {
+            .leftPart,.middlePart,.rightPart,.rpart
+            {
+                width:80vw;
+            }
+            .bodyContent
+            {
+                align-items: center;
+            }
+            
+        }
+        .bd-img{
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <!-- navbar -->
+    <nav class="nav d-flex justify-content-around align-items-center bg flex-row">
+        <div class="d-flex justify-content-evenly gap-3 align-items-center">
+          <a class="navbar-brand" href="#">
+            <img src="./images/linkedinLogo.png" alt="LinkedIn" width="30" height="30">
+          </a>
+          <div class="input-group">
+            <span class="input-group-text " id="basic-addon1"><i class="fa-solid fa-magnifying-glass"></i></span>
+            <input type="text" class="form-control d-sm-none d-lg-block d-md-block d-none" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+          </div>
+        </div>
+        <div class="d-flex justify-content-evenly align-items-center gap-5 fs-5">
+            <i class="fa-solid fa-house"></i>
+            <i class="fa-solid fa-user-group"></i>
+            <i class="fa-solid fa-briefcase  d-none d-lg-flex d-md-flex d-sm-none"></i>
+            <i class="fa-solid fa-message position-relative">
+                <span class="notify-mark position-absolute top-0 start-100 translate-middle badge bg-danger d-flex justify-content-center align-items-center">
+                  5
+                </span>
+            </i>
+            <i class="fa-solid fa-bell position-relative">
+                <span class="notify-mark position-absolute top-0 start-100 translate-middle badge bg-danger d-flex justify-content-center align-items-center">
+                  11
+                </span>
+            </i>
+            <div class=" d-none d-lg-flex d-md-flex d-sm-none justify-content-center dots  border-start px-4 py-1 border-2 border-secondary ">
+                <i class="fa-solid fa-ellipsis-vertical"></i>
+                <i class="fa-solid fa-ellipsis-vertical"></i>
+                <i class="fa-solid fa-ellipsis-vertical"></i>
+            </div>
+            <div class="px-3 py-1 bg-dark  d-none d-lg-flex d-md-flex d-sm-none">
+                <i class="fa-solid fa-play text-light fs-6"></i>
+            </div>
+        </div>
+    </nav>
+    <div class="bodyContent d-flex gap-3 justify-content-center flex-column flex-lg-row flex-md-row flex-sm-column">
+        <!-- left components div -->
+        <div class="leftPart d-flex justify-content-start align-items-start gap-2 flex-column">
+            <div class="lsub1 w-100 bg rounded">
+                <img src="Bimage.png" class="bd-img" alt="">
+                
+                <div class="profile">
+                    
+                    <img src="profilepic.png" height="80px" class="rounded-circle" alt="profile_pic">
+                </div>
+                <div class="d-flex align-items-start flex-column position-relative profileInfo px-3">
+                <h5><strong>Harini Jakinapelly</strong></h5>
+                <div>Attended Sreenidhi Institue Of Science and Technology</div>
+                <div>Being a member of SMART INTERVIEWS</div>
+                
+                <div>Hyderabad, Telangana</div>
+                
+                <div class="d-flex justify-content-center gap-1">
+                </div>
+                </div>
+            </div>
+            <div class="lsub2 w-100 bg rounded">
+                <div class="d-flex justify-content-evenly align-items-start gap-4 mx-2 py-2 border-bottom border-secondary">
+                    <div class="d-flex flex-column align-items-start">
+                        <p>profile viewers</p>
+                        
+                    </div>
+                    <div class="d-flex flex-column align-items-end">
+                        <p class="text-primary">33</p>
+                        
+                    </div>
+                </div>
+                <p class="text-center py-2"><strong>Your Premium features</strong></p>
+            </div>
+            <div class="lsub3 w-100 bg rounded d-flex justify-content-center align-items-start px-4 gap-2 flex-column">
+                <div class="d-flex gap-3 justify-content-center align-items-center"><strong>Puzzle games</strong></div>
+                <div class="d-flex gap-3 justify-content-center align-items-center"><strong>Saved posts</strong></div>
+                <div class="d-flex gap-3 justify-content-center align-items-center"><strong>Groups</strong></div>
+            </div>
+        </div>
+        <!-- middle and right components div -->
+        <div class="d-flex gap-3 flex-column flex-lg-row flex-md-column flex-sm-column">
+            <!-- middle components div -->
+            <div class="middlePart d-flex flex-column gap-2">
+                <div class="mtop w-100 rounded bg p-3">
+                    <div class="d-flex justify-content-evenly align-items-center">
+                        <img src="PROFILEPIC.PNG" class="bg-secondary rounded-circle" height="50px" width="50px" alt="">
+                        <button class="bttn">Start a post</button>
+                    </div>
+                    <div class="d-flex justify-content-around align-items-center py-4 mid-icons">
+                        <div class="d-flex justify-content-center align-items-center gap-2">
+                            <p><i class="fa-regular fa-image text-primary"></i></p>
+                            <p>Photo</p>
+                        </div>
+                        <div class="d-flex justify-content-center align-items-center gap-2">
+                            <p><i class="fa-solid fa-play text-success"></i></p>
+                            <p>Video</p>
+                        </div>
+                        
+                        <div class="d-flex  justify-content-center align-items-center gap-2">
+                           <p> <i class="fa-solid fa-newspaper text-danger"></i></p>
+                            <p>Write article</p>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="mcomponents w-100 rounded bg p-4">
+                    <div class="mheadPart d-flex justify-content-between align-items-start">
+                        <div class="d-flex align-items-center gap-3">
+                            <img src="MIDDLE.png" height="50px" class="rounded-circle"alt="others_profile_pic">
+                            <div class="d-flex flex-column text-secondary">
+                                <div><strong class="fw-bold text-dark fs-6">Bharath Chappa</strong>.1st</div>
+                                <div>Attended Sreenidhi Institue of Science and Technology</div>
+                                <div>2d.</div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-center gap-4 fs-5">
+                            <i class="fa-solid fa-ellipsis"></i>
+                            <i class="fa-solid fa-xmark"></i>
+                        </div>
+                    </div>
+                    <div class="mbodyPart">
+                        <p>Had a great time playing in the RealPage Premier League (RPL) by RealPage, Inc.! 
+                            Our team, Saturn Superstars, performed really well under the captaincy of Akhil Raju Tuniki. We had a great time together and put in a lot of effort. A big thank you to my incredible teammates: Sreenu Sankula, Rajesh Gandla, Bhanu Teja, Chandra Shekar Chilukuri, Bandla Shyambabu, Sudheer kakaraparthi, Suresh Phanendra Naidu Dudi, Eswar Siyyapureddy, Praveen Kumar Cinane, Basha Dudekula, Shivasai Kalishetti, Lenin Pathri, and Akhil Raju Tuniki.</p>
+                        <div>
+                           <img src="bharat.png" class="img-fluid w-100" height="370px" alt=""> 
+                        </div>
+                        <div class="d-flex align-items-center justify-content-between my-2">
+                            <div class="d-flex align-items-center justify-content-between gap-2">
+                                <img src="bharat1.png" height="30px" alt="appreciates_svg">
+                                <div>Likitha Mete and 74 others</div>
+                            </div>
+                            <div>2 comments</div>
+                        </div>
+                    </div>
+                    <div class="mfootPart border-top border-secondary border-1">
+                        <div class="d-flex justify-content-around align-items-center py-2 mid-icons">
+                            <div class="d-flex justify-content-center align-items-center gap-2">
+                                <p><i class="fa-regular fa-thumbs-up"></i></p>
+                                <p class=" d-none d-lg-flex d-md-flex d-sm-none">like</p>
+                            </div>
+                            <div class="d-flex justify-content-center align-items-center gap-2">
+                                <p><i class="fa-regular fa-comment"></i></p>
+                                <p class=" d-none d-lg-flex d-md-flex d-sm-none">Comment</p>
+                            </div>
+                            <div class="d-flex  justify-content-center align-items-center gap-2">
+                               <p><i class="fa-solid fa-repeat"></i></p>
+                                <p class=" d-none d-lg-flex d-md-flex d-sm-none">Repost</p>
+                            </div>
+                            <div class="d-flex  justify-content-center align-items-center gap-2">
+                                <p><i class="fa-solid fa-paper-plane"></i></p>
+                                 <p class=" d-none d-lg-flex d-md-flex d-sm-none">Share</p>
+                             </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mcomponents w-100 rounded bg p-4">
+                    <div class="mheadPart d-flex justify-content-between align-items-start" >
+                        <div class="d-flex align-items-center gap-3">
+                            <img src="sridhar.png" height="60px" class="rounded-circle"alt="others_profile_pic">
+                            <div class="d-flex flex-column text-secondary">
+                                <div><strong class="fw-bold text-dark fs-6">Konda Sridhar</strong>.2nd</div>
+                                <div>Student Placecomm member @SNIST</div>
+                                <div>1w.</div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-center gap-4 fs-5">
+                            <i class="fa-solid fa-ellipsis"></i>
+                            <i class="fa-solid fa-xmark"></i>
+                        </div>
+                    </div>
+                    <div class="mbodyPart">
+                        <p> Pitching for Domain Roles: My Pitching Experience in PlaceComm!
+                            .
+                            
+                            I'm thrilled to announce that I recently had the opportunity to present my ideas for the domain roles in the Student Placement Committee (PlaceComm) at SNIST, focusing on domains that align with my interests in hackathons and corporate relations.
+                            .
+                            ⚡ Excitement & Future Vision:
+                            🔹 A new chapter begins—thrilled for the journey ahead!
+                            🔹 Excited to bring fresh ideas to life and make an impact!
+                            🔹 On a mission to redefine student placements!</p>
+                        <div>
+                            <img src="sridhar1.png" class="img-fluid w-100" height="370px" alt=""> 
+                        </div>
+                        <div class="d-flex align-items-center justify-content-between my-2">
+                            <div class="d-flex align-items-center justify-content-between gap-2">
+                                <img src="sridhar2.png" height="30px" alt="appreciates_svg">
+                                <div>Hasanth kumar and 42 others</div>
+                            </div>
+                            <div>6 comments</div>
+                        </div>
+                    </div>
+                    <div class="mfootPart border-top border-secondary border-1">
+                        <div class="d-flex justify-content-around align-items-center py-2 mid-icons">
+                            <div class="d-flex justify-content-center align-items-center gap-2">
+                                <p><i class="fa-regular fa-thumbs-up"></i></p>
+                                <p class=" d-none d-lg-flex d-md-flex d-sm-none">like</p>
+                            </div>
+                            <div class="d-flex justify-content-center align-items-center gap-2">
+                                <p><i class="fa-regular fa-comment"></i></p>
+                                <p class=" d-none d-lg-flex d-md-flex d-sm-none">Comment</p>
+                            </div>
+                            <div class="d-flex  justify-content-center align-items-center gap-2">
+                               <p><i class="fa-solid fa-repeat"></i></p>
+                                <p class=" d-none d-lg-flex d-md-flex d-sm-none">Repost</p>
+                            </div>
+                            <div class="d-flex  justify-content-center align-items-center gap-2">
+                                <p><i class="fa-solid fa-paper-plane"></i></p>
+                                 <p class=" d-none d-lg-flex d-md-flex d-sm-none">Share</p>
+                             </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mcomponents w-100 rounded bg p-4">
+                    <div class="mheadPart d-flex justify-content-between align-items-start" >
+                        <div class="d-flex align-items-center gap-3">
+                            <img src="praneetha.png" height="50px" class="rounded-circle"alt="others_profile_pic">
+                            <div class="d-flex flex-column text-secondary">
+                                <div><strong class="fw-bold text-dark fs-6">Ravula Praneetha</strong>.1st</div>
+                                <div>Sreenidhi institute of science and technology</div>
+                                <div>6d</div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-center gap-4 fs-5">
+                            <i class="fa-solid fa-ellipsis"></i>
+                            <i class="fa-solid fa-xmark"></i>
+                        </div>
+                    </div>
+                    <div class="mbodyPart">
+                        <p>Just finished the course “What Is Generative AI?</p>
+                        <div>
+                            <img src="praneetha1.png" class="img-fluid w-100" height="370px" alt=""> 
+                        </div>
+                        <div class="d-flex align-items-center justify-content-between my-2">
+                            <div class="d-flex align-items-center justify-content-between gap-2">
+                                <img src="praneetha2.png" height="30px" alt="appreciates_svg">
+                                <div>Shruthi and 280 others</div>
+                            </div>
+                            <div>30 comments</div>
+                        </div>
+                    </div>
+                    <div class="mfootPart border-top border-secondary border-1">
+                        <div class="d-flex justify-content-around align-items-center py-2 mid-icons">
+                            <div class="d-flex justify-content-center align-items-center gap-2">
+                                <p><i class="fa-regular fa-thumbs-up"></i></p>
+                                <p  class="d-none d-lg-flex d-md-flex d-sm-none">like</p>
+                            </div>
+                            <div class="d-flex justify-content-center align-items-center gap-2">
+                                <p><i class="fa-regular fa-comment"></i></p>
+                                <p  class="d-none d-lg-flex d-md-flex d-sm-none">Comment</p>
+                            </div>
+                            <div class="d-flex  justify-content-center align-items-center gap-2">
+                               <p><i class="fa-solid fa-repeat"></i></p>
+                                <p  class="d-none d-lg-flex d-md-flex d-sm-none">Repost</p>
+                            </div>
+                            <div class="d-flex  justify-content-center align-items-center gap-2">
+                                <p><i class="fa-solid fa-paper-plane"></i></p>
+                                 <p  class="d-none d-lg-flex d-md-flex d-sm-none">Share</p>
+                             </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mcomponents w-100 rounded bg p-4">
+                    <div class="mheadPart d-flex justify-content-between align-items-start" >
+                        <div class="d-flex align-items-center gap-3">
+                            <img src="afshan.png" height="50px" class="rounded-circle"alt="others_profile_pic">
+                            <div class="d-flex flex-column text-secondary">
+                                <div><strong class="fw-bold text-dark fs-6">Mohammad Afshan</strong>.1st</div>
+                                <div>Cybersecurity Enthusiast | ethical hacking | AZ-400</div>
+                                <div>3d.</div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-center gap-4 fs-5">
+                            <i class="fa-solid fa-ellipsis"></i>
+                            <i class="fa-solid fa-xmark"></i>
+                        </div>
+                    </div>
+                
+                    <div class="mbodyPart">
+                        <p>Leadership: Lifting Others Up, Not Tearing Them Down
+                            As leaders, we have a choice to make. We can choose to focus on lifting our team members up, empowering them to succeed, and celebrating their wins. Or, we can get bogged down in negativity, criticizing and complaining about others.
+                            </p>
+                        <div>
+                           <img src="afshan1.png" class="img-fluid w-100" height="370px" alt=""> 
+                        </div>
+                        <div class="d-flex align-items-center justify-content-between my-2">
+                            <div class="d-flex align-items-center justify-content-between gap-2">
+                                <img src="praneetha2.png" height="30px" alt="appreciates_svg">
+                                <div>Ashis and 150 others</div>
+                            </div>
+                            <div>12 comments</div>
+                        </div>
+                    </div>
+                    <div class="mfootPart border-top border-secondary border-1">
+                        <div class="d-flex justify-content-around align-items-center py-2 mid-icons">
+                            <div class="d-flex justify-content-center align-items-center gap-2">
+                                <p><i class="fa-regular fa-thumbs-up"></i></p>
+                                <p class=" d-none d-lg-flex d-md-flex d-sm-none">like</p>
+                            </div>
+                            <div class="d-flex justify-content-center align-items-center gap-2">
+                                <p><i class="fa-regular fa-comment"></i></p>
+                                <p class=" d-none d-lg-flex d-md-flex d-sm-none">Comment</p>
+                            </div>
+                            <div class="d-flex  justify-content-center align-items-center gap-2">
+                               <p><i class="fa-solid fa-repeat"></i></p>
+                                <p class=" d-none d-lg-flex d-md-flex d-sm-none">Repost</p>
+                            </div>
+                            <div class="d-flex  justify-content-center align-items-center gap-2">
+                                <p><i class="fa-solid fa-paper-plane"></i></p>
+                                 <p class=" d-none d-lg-flex d-md-flex d-sm-none">Share</p>
+                             </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mcomponents w-100 rounded bg p-4">
+                    <div class="mheadPart d-flex justify-content-between align-items-start" >
+                        <div class="d-flex align-items-center gap-3">
+                            <img src="afshan.png" height="50px" class="rounded-circle"alt="others_profile_pic">
+                            <div class="d-flex flex-column text-secondary">
+                                <div><strong class="fw-bold text-dark fs-6">Mohammad Afshan</strong>.2nd</div>
+                                <div>Cybersecurity Enthusiast | ethical hacking | AZ-400</div>
+                                <div>6d.</div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-center gap-4 fs-5">
+                            <i class="fa-solid fa-ellipsis"></i>
+                            <i class="fa-solid fa-xmark"></i>
+                        </div>
+                    </div>
+                    <div class="mbodyPart">
+                        <p>Leadership: Lifting Others Up, Not Tearing Them Down
+                            As leaders, we have a choice to make. We can choose to focus on lifting our team members up, empowering them to succeed, and celebrating their wins. Or, we can get bogged down in negativity, criticizing and complaining about others.
+                            </p>
+                        <div>
+    
+                        <div>
+                            <img src="afshan1.png" class="img-fluid w-100" height="370px" alt=""> 
+                        </div>
+                        <div class="d-flex align-items-center justify-content-between my-2">
+                            <div class="d-flex align-items-center justify-content-between gap-2">
+                                <img src="praneetha2.png" height="30px" alt="appreciates_svg">
+                                <div>shreya and 80 others</div>
+                            </div>
+                            <div>5 comments</div>
+                        </div>
+                    </div>
+                    <div class="mfootPart border-top border-secondary border-1">
+                        <div class="d-flex justify-content-around align-items-center py-2 mid-icons">
+                            <div class="d-flex justify-content-center align-items-center gap-2">
+                                <p><i class="fa-regular fa-thumbs-up"></i></p>
+                                <p class=" d-none d-lg-flex d-md-flex d-sm-none">like</p>
+                            </div>
+                            <div class="d-flex justify-content-center align-items-center gap-2">
+                                <p><i class="fa-regular fa-comment"></i></p>
+                                <p class=" d-none d-lg-flex d-md-flex d-sm-none">Comment</p>
+                            </div>
+                            <div class="d-flex  justify-content-center align-items-center gap-2">
+                               <p><i class="fa-solid fa-repeat"></i></p>
+                                <p class=" d-none d-lg-flex d-md-flex d-sm-none">Repost</p>
+                            </div>
+                            <div class="d-flex  justify-content-center align-items-center gap-2">
+                                <p><i class="fa-solid fa-paper-plane"></i></p>
+                                 <p class=" d-none d-lg-flex d-md-flex d-sm-none">Share</p>
+                             </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mcomponents w-100 rounded bg p-4">
+                    <div class="mheadPart d-flex justify-content-between align-items-start" >
+                        <div class="d-flex align-items-center gap-3">
+                            <img src="praneetha.png" height="50px" class="rounded-circle"alt="others_profile_pic">
+                            <div class="d-flex flex-column text-secondary">
+                                <div><strong class="fw-bold text-dark fs-6">Ravula Praneetha</strong>.1st</div>
+                                <div>Sreenidhi institute of Science and Technology</div>
+                                <div>6d.</div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-center gap-4 fs-5">
+                            <i class="fa-solid fa-ellipsis"></i>
+                            <i class="fa-solid fa-xmark"></i>
+                        </div>
+                    </div>
+                    <div class="mbodyPart">
+                        <p>Just finished the course “What Is Generative AI?</p>
+
+                        <div>
+                            <img src="praneetha1.png" class="img-fluid w-100" height="370px" alt=""> 
+                        </div>
+                        <div class="d-flex align-items-center justify-content-between my-2">
+                            <div class="d-flex align-items-center justify-content-between gap-2">
+                                <img src="praneetha2.png" height="30px" alt="appreciates_svg">
+                                <div>Shruthi and 280 others</div>
+                            </div>
+                            <div>30 comments</div>
+                        </div>
+                    </div>
+                    <div class="mfootPart border-top border-secondary border-1">
+                        <div class="d-flex justify-content-around align-items-center py-2 mid-icons">
+                            <div class="d-flex justify-content-center align-items-center gap-2">
+                                <p><i class="fa-regular fa-thumbs-up"></i></p>
+                                <p class=" d-none d-lg-flex d-md-flex d-sm-none">like</p>
+                            </div>
+                            <div class="d-flex justify-content-center align-items-center gap-2">
+                                <p><i class="fa-regular fa-comment"></i></p>
+                                <p class=" d-none d-lg-flex d-md-flex d-sm-none">Comment</p>
+                            </div>
+                            <div class="d-flex  justify-content-center align-items-center gap-2">
+                               <p><i class="fa-solid fa-repeat"></i></p>
+                                <p class=" d-none d-lg-flex d-md-flex d-sm-none">Repost</p>
+                            </div>
+                            <div class="d-flex  justify-content-center align-items-center gap-2">
+                                <p><i class="fa-solid fa-paper-plane"></i></p>
+                                 <p class=" d-none d-lg-flex d-md-flex d-sm-none">Share</p>
+                             </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mcomponents w-100 rounded bg p-4">
+                    <div class="mheadPart d-flex justify-content-between align-items-start" >
+                        <div class="d-flex align-items-center gap-3">
+                            <img src="afshan.png" height="50px" class="rounded-circle"alt="others_profile_pic">
+                            <div class="d-flex flex-column text-secondary">
+                                <div><strong class="fw-bold text-dark fs-6">Mohammad Afshan</strong>.2nd</div>
+                                <div>Cybersecurity Enthusiast | ethical hacking | AZ-400</div>
+                                <div>6d.</div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-center gap-4 fs-5">
+                            <i class="fa-solid fa-ellipsis"></i>
+                            <i class="fa-solid fa-xmark"></i>
+                        </div>
+                    </div>
+                    <div class="mbodyPart">
+                        <p>Leadership: Lifting Others Up, Not Tearing Them Down
+                            As leaders, we have a choice to make. We can choose to focus on lifting our team members up, empowering them to succeed, and celebrating their wins. Or, we can get bogged down in negativity, criticizing and complaining about others.
+                            </p>
+                       
+                        <div>
+                            <img src="afshan1.png" class="img-fluid w-100" height="370px" alt=""> 
+                        </div>
+                        <div class="d-flex align-items-center justify-content-between my-2">
+                            <div class="d-flex align-items-center justify-content-between gap-2">
+                                <img src="praneetha2.png" height="30px" alt="appreciates_svg">
+                                <div>shreya and 80 others</div>
+                            </div>
+                            <div>5 comments</div>
+                        </div>
+                    </div>
+                    <div class="mfootPart border-top border-secondary border-1">
+                        <div class="d-flex justify-content-around align-items-center py-2 mid-icons">
+                            <div class="d-flex justify-content-center align-items-center gap-2">
+                                <p><i class="fa-regular fa-thumbs-up"></i></p>
+                                <p class=" d-none d-lg-flex d-md-flex d-sm-none">like</p>
+                            </div>
+                            <div class="d-flex justify-content-center align-items-center gap-2">
+                                <p><i class="fa-regular fa-comment"></i></p>
+                                <p class=" d-none d-lg-flex d-md-flex d-sm-none">Comment</p>
+                            </div>
+                            <div class="d-flex  justify-content-center align-items-center gap-2">
+                               <p><i class="fa-solid fa-repeat"></i></p>
+                                <p class=" d-none d-lg-flex d-md-flex d-sm-none">Repost</p>
+                            </div>
+                            <div class="d-flex  justify-content-center align-items-center gap-2">
+                                <p><i class="fa-solid fa-paper-plane"></i></p>
+                                 <p class=" d-none d-lg-flex d-md-flex d-sm-none">Share</p>
+                             </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mcomponents w-100 rounded bg p-4">
+                    <div class="mheadPart d-flex justify-content-between align-items-start" >
+                        <div class="d-flex align-items-center gap-3">
+                            <img src="afshan.png" height="50px" class="rounded-circle"alt="others_profile_pic">
+                            <div class="d-flex flex-column text-secondary">
+                                <div><strong class="fw-bold text-dark fs-6">Mohammad Afshan</strong>.2nd</div>
+                                <div>Cybersecurity Enthusiast | ethical hacking | AZ-400</div>
+                                <div>6d.</div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-center gap-4 fs-5">
+                            <i class="fa-solid fa-ellipsis"></i>
+                            <i class="fa-solid fa-xmark"></i>
+                        </div>
+                    </div>
+                    <div class="mbodyPart">
+                        <p>Leadership: Lifting Others Up, Not Tearing Them Down
+                            As leaders, we have a choice to make. We can choose to focus on lifting our team members up, empowering them to succeed, and celebrating their wins. Or, we can get bogged down in negativity, criticizing and complaining about others.
+                            </p>
+                        <div>
+                            <img src="afshan1.png" class="img-fluid w-100" height="370px" alt=""> 
+                        </div>
+                        <div class="d-flex align-items-center justify-content-between my-2">
+                            <div class="d-flex align-items-center justify-content-between gap-2">
+                                <img src="praneetha2.png" height="30px" alt="appreciates_svg">
+                                <div>shreya and 80 others</div>
+                            </div>
+                            <div>5 comments</div>
+                        </div>
+                    </div>
+                    <div class="mfootPart border-top border-secondary border-1">
+                        <div class="d-flex justify-content-around align-items-center py-2 mid-icons">
+                            <div class="d-flex justify-content-center align-items-center gap-2">
+                                <p><i class="fa-regular fa-thumbs-up"></i></p>
+                                <p class=" d-none d-lg-flex d-md-flex d-sm-none">like</p>
+                            </div>
+                            <div class="d-flex justify-content-center align-items-center gap-2">
+                                <p><i class="fa-regular fa-comment"></i></p>
+                                <p class=" d-none d-lg-flex d-md-flex d-sm-none">Comment</p>
+                            </div>
+                            <div class="d-flex  justify-content-center align-items-center gap-2">
+                               <p><i class="fa-solid fa-repeat"></i></p>
+                                <p class=" d-none d-lg-flex d-md-flex d-sm-none">Repost</p>
+                            </div>
+                            <div class="d-flex  justify-content-center align-items-center gap-2">
+                                <p><i class="fa-solid fa-paper-plane"></i></p>
+                                 <p class=" d-none d-lg-flex d-md-flex d-sm-none">Share</p>
+                             </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mcomponents w-100 rounded bg p-4">
+                    <div class="mheadPart d-flex justify-content-between align-items-start" >
+                        <div class="d-flex align-items-center gap-3">
+                            <img src="praneetha.png" height="50px" class="rounded-circle"alt="others_profile_pic">
+                            <div class="d-flex flex-column text-secondary">
+                                <div><strong class="fw-bold text-dark fs-6">Ravula Pranitha</strong>.1st</div>
+                                <div>Sreenidhi Institute of Science and Technology</div>
+                                <div>10d.</div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-center gap-4 fs-5">
+                            <i class="fa-solid fa-ellipsis"></i>
+                            <i class="fa-solid fa-xmark"></i>
+                        </div>
+                    </div>
+                    <div class="mbodyPart">
+                        <p>Just finished the course “What Is Generative AI?</p>
+
+
+                        <div>
+                            <img src="praneetha1.png" class="img-fluid w-100" height="370px" alt=""> 
+                        </div>
+                        <div class="d-flex align-items-center justify-content-between my-2">
+                            <div class="d-flex align-items-center justify-content-between gap-2">
+                                <img src="praneetha2.png" height="30px" alt="appreciates_svg">
+                                <div>Shruthi and 280 others</div>
+                            </div>
+                            <div>30 comments</div>
+                        </div>
+                    </div>
+                    <div class="mfootPart border-top border-secondary border-1">
+                        <div class="d-flex justify-content-around align-items-center py-2 mid-icons">
+                            <div class="d-flex justify-content-center align-items-center gap-2">
+                                <p><i class="fa-regular fa-thumbs-up"></i></p>
+                                <p class=" d-none d-lg-flex d-md-flex d-sm-none">like</p>
+                            </div>
+                            <div class="d-flex justify-content-center align-items-center gap-2">
+                                <p><i class="fa-regular fa-comment"></i></p>
+                                <p class=" d-none d-lg-flex d-md-flex d-sm-none">Comment</p>
+                            </div>
+                            <div class="d-flex  justify-content-center align-items-center gap-2">
+                               <p><i class="fa-solid fa-repeat"></i></p>
+                                <p class=" d-none d-lg-flex d-md-flex d-sm-none">Repost</p>
+                            </div>
+                            <div class="d-flex  justify-content-center align-items-center gap-2">
+                                <p><i class="fa-solid fa-paper-plane"></i></p>
+                                 <p class=" d-none d-lg-flex d-md-flex d-sm-none">Share</p>
+                             </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mcomponents w-100 rounded bg p-4">
+                    <div class="mheadPart d-flex justify-content-between align-items-start" >
+                        <div class="d-flex align-items-center gap-3">
+                            <img src="praneetha.png" height="50px" class="rounded-circle"alt="others_profile_pic">
+                            <div class="d-flex flex-column text-secondary">
+                                <div><strong class="fw-bold text-dark fs-6">Atharv</strong>.2nd</div>
+                                <div>Sreenidhi Institue of Science and Technology</div>
+                                <div>6d.</div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-center gap-4 fs-5">
+                            <i class="fa-solid fa-ellipsis"></i>
+                            <i class="fa-solid fa-xmark"></i>
+                        </div>
+                    </div>
+                    <div class="mbodyPart">
+                        <p>Just finished the course “What Is Generative AI?</p>
+    
+                        <div>
+                            <img src="praneetha1.png" class="img-fluid w-100" height="370px" alt=""> 
+                        </div>
+                        <div class="d-flex align-items-center justify-content-between my-2">
+                            <div class="d-flex align-items-center justify-content-between gap-2">
+                                <img src="praneetha2.png" height="30px" alt="appreciates_svg">
+                                <div>shreya and 80 others</div>
+                            </div>
+                            <div>5 comments</div>
+                        </div>
+                    </div>
+                    <div class="mfootPart border-top border-secondary border-1">
+                        <div class="d-flex justify-content-around align-items-center py-2 mid-icons">
+                            <div class="d-flex justify-content-center align-items-center gap-2">
+                                <p><i class="fa-regular fa-thumbs-up"></i></p>
+                                <p class=" d-none d-lg-flex d-md-flex d-sm-none">like</p>
+                            </div>
+                            <div class="d-flex justify-content-center align-items-center gap-2">
+                                <p><i class="fa-regular fa-comment"></i></p>
+                                <p class=" d-none d-lg-flex d-md-flex d-sm-none">Comment</p>
+                            </div>
+                            <div class="d-flex  justify-content-center align-items-center gap-2">
+                               <p><i class="fa-solid fa-repeat"></i></p>
+                                <p class=" d-none d-lg-flex d-md-flex d-sm-none">Repost</p>
+                            </div>
+                            <div class="d-flex  justify-content-center align-items-center gap-2">
+                                <p><i class="fa-solid fa-paper-plane"></i></p>
+                                 <p class=" d-none d-lg-flex d-md-flex d-sm-none">Share</p>
+                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+            <!-- right components div -->
+            <div class="rightPart d-flex flex-column gap-2">
+                <div class="rtop rounded bg py-4">
+                    <h3 class="px-3">Trending Now</h3>
+                        <h6 class="text-secondary px-3">curated by LinkedIn News</h6>
+                        <div class="hvr">
+                            <h6>SpiceJet Profitable first time in 10 years</h6>
+                            <p class="text-secondary" style="font-size:13px;">13m ago . 49,025 readers</p>
+                        </div>
+                        <div class="hvr">
+                            <h6>APAC leads in AI adoption</h6>
+                            <p class="text-secondary" style="font-size:13px;">2h ago . 5,925 readers</p>
+                        </div>
+                        <div class="hvr">
+                            <h6>Globetrotting gets costlier</h6>
+                            <p class="text-secondary" style="font-size:13px;">6h ago . 1,025 readers</p>
+                        </div>
+                        <div class="hvr">
+                            <h6>Indian firms embrace DEI efforts</h6>
+                            <p class="text-secondary" style="font-size:13px;">9h ago . 476 readers</p>
+                        </div>
+                        <h6 class="px-3">Show more</h6>
+                        <h6 class="text-secondary px-3">Today's puzzles</h6>
+                        <div class="d-flex flex-column gap-3">
+                            <div class="puzzle d-flex justify-content-between align-items-center  p-2 hvr">
+                                <div class="d-flex align-items-center gap-2">
+                                    <img src="tango.png" height="35px" alt="">
+                                    <div class="d-flex flex-column">
+                                        <div>
+                                            Tango
+                                        </div>
+                                        <div>
+                                           Harmonize the grid
+                                        </div>
+                                    </div>
+                                </div>
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </div>
+                            <div class="puzzle d-flex justify-content-between align-items-center  p-2 hvr">
+                                <div class="d-flex align-items-center gap-2">
+                                    <img src="queen.png" height="35px" alt="">
+                                    <div class="d-flex flex-column">
+                                        <div>
+                                            Queens
+                                        </div>
+                                        <div>
+                                            Crown each region
+                                        </div>
+                                    </div>
+                                </div>
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </div>
+                            <div class="puzzle d-flex justify-content-between align-items-center p-2  hvr">
+                                <div class="d-flex align-items-center gap-2">
+                                    <img src="pinpoint.png" height="32px" alt="">
+                                    <div class="d-flex flex-column">
+                                        <div>
+                                            Pinpoint
+                                        </div>
+                                        <div>
+                                            Guess the category
+                                        </div>
+                                    </div>
+                                </div>
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </div>
+                            <div class="puzzle d-flex justify-content-between align-items-center p-2 hvr">
+                                <div class="d-flex align-items-center gap-2">
+                                    <img src="crossclimb.png" height="35px" alt="">
+                                    <div class="d-flex flex-column">
+                                        <div>
+                                            Crossclimb
+                                        </div>
+                                        <div>
+                                            Unlock a trivia ladder
+                                        </div>
+                                    </div>
+                                </div>
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </div>
+                        </div>
+                </div>
+                <div class="rpart">
+                    <div class="rTop w-100 rounded bg d-flex flex-column justify-content-around align-items-center p-4">
+                        <p class="text-secondary">HARINI unlock your full potential with linkein premium</p>
+                        <img src="Profilepic.png" class="rounded-circle" alt="profile_picture" width="80px">
+                        <h6 class="text-secondary fw-bold">See who is viewed your profile in last 365 days</h6>
+                        <button class="btn btn-outline-primary fw-bold">Try for free</button>
+                    </div>
+                    <div class="rBtm w-100 rounded  d-flex align-items-center bg gap-1 p-2 my-2">
+                        <div class="text-danger-emphasis bg-danger-subtle border border-danger-subtle rounded-3 p-2">TIP</div>
+                        <h6 class="text-secondary">Try LinkedIn on Windows App</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>
